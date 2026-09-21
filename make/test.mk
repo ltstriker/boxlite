@@ -262,8 +262,10 @@ test\:unit\:cli:
 		cargo test -p boxlite-cli --bins -- --test-threads=1 '::tests::'; \
 	fi
 
-# Hypervisor and VMM crate unit tests alone; they need no VM and no vendored
-# submodules.
+# Hypervisor and VMM crate unit tests alone; they need no vendored submodules.
+# The KVM tests that run guest instructions skip without access to /dev/kvm;
+# set BOXLITE_TEST_REQUIRE_KVM=1 on a host that must provide it to turn that
+# skip into a failure.
 test\:unit\:vmm:
 	@cargo test $(RUST_UNIT_VMM_ARGS) -- $(CARGOTEST_FILTER)
 

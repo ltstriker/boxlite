@@ -29,10 +29,11 @@ boxlite-vmm
 | `irq` | Device interrupt assignment and routing; HVF and KVM provide the controller, WHP (M10) only local APICs |
 | `bus` | Address-range registration and device I/O dispatch |
 
-Backend implementation and guest boot follow in M1. Virtio devices, the BoxLite
-engine adapter, engine selection, and `native` feature wiring follow in M2.
-Neither new crate depends on `boxlite-shared`, and both are unpublished while
-their interfaces are being established.
+The KVM backend runs a guest (`boxlite_hypervisor::kvm`); its interrupt
+controller, the HVF backend and guest boot follow in M1. Virtio devices, the
+BoxLite engine adapter, engine selection, and `native` feature wiring follow in
+M2. Neither new crate depends on `boxlite-shared`, and both are unpublished
+while their interfaces are being established.
 
 ## Build
 
