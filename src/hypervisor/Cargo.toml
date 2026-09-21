@@ -7,3 +7,15 @@ authors.workspace = true
 license.workspace = true
 publish = false
 description = "Host hypervisor backends for BoxLite's VMM"
+
+# The KVM backend. Linux-only: `lib.rs` compiles `kvm` only on Linux hosts.
+# kvm-ioctls wraps every ioctl at fixed arity, which avoids the variadic-FFI ABI
+# trouble that forced `src/boxlite/src/kvm_smoke.c` to be written in C.
+[target.'cfg(target_os = "linux")'.dependencies]
+kvm-ioctls = "0.25"
+kvm-bindings = "0.14"
+vmm-sys-util = "0.15"  # Signal handler registration and SIGRTMIN discovery
+libc = "0.2"
+
+[target.'cfg(target_os = "linux")'.dev-dependencies]
+static_assertions = "1.1"  # Pin the !Send bound on the backend vCPU type
