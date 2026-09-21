@@ -264,7 +264,7 @@ test\:unit\:cli:
 
 # Hypervisor and VMM crate unit tests alone; they need no vendored submodules.
 # The KVM tests that run guest instructions skip without access to /dev/kvm;
-# set BOXLITE_TEST_REQUIRE_KVM=1 on a host that must provide it to turn that
+# setting BOXLITE_TEST_REQUIRE_KVM on a host that must provide it turns that
 # skip into a failure.
 test\:unit\:vmm:
 	@cargo test $(RUST_UNIT_VMM_ARGS) -- $(CARGOTEST_FILTER)

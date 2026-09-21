@@ -44,6 +44,6 @@ From the repository root, run `make vmm`, `make clippy:vmm` or
 build commands.
 
 The KVM tests that run guest instructions need a usable `/dev/kvm`. They print
-`SKIP` and pass without one, which is what every GitHub-hosted runner is; a
-host that is supposed to provide KVM sets `BOXLITE_TEST_REQUIRE_KVM=1`, which
-turns the skip into a failure.
+`SKIP` and pass without one, which is what every GitHub-hosted runner is. A
+host that is supposed to provide KVM sets `BOXLITE_TEST_REQUIRE_KVM`, and any
+value turns the skip into a failure.

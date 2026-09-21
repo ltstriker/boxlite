@@ -6,9 +6,14 @@
 //! KVM leaves the guest when `kvm_run.immediate_exit` is non-zero at entry, and
 //! `KVM_RUN` fails with `EINTR` when a signal arrives while the vCPU is inside
 //! the guest. Neither alone is enough: the flag does not disturb a vCPU that is
-//! already running, and a signal that lands just before entry is lost. Setting
-//! the flag and then signalling the thread covers both, which is what
-//! Firecracker and libkrun do (`libkrun/src/vmm/src/linux/vstate.rs:1023-1037`).
+//! already running, and a signal that lands just before entry is lost. The
+//! kicking thread therefore sets the flag and then signals.
+//!
+//! libkrun and Firecracker reach the same place from the other side: they only
+//! signal, and their handler sets the flag on the vCPU thread itself, reaching
+//! the vCPU through a thread-local pointer
+//! (`libkrun/src/vmm/src/linux/vstate.rs:1023-1037`). Setting it from the
+//! kicking thread needs no such pointer, so the handler here does nothing.
 
 use std::{
     io,

@@ -3,9 +3,9 @@
 
 //! Tests that run real guest instructions, so they need a usable `/dev/kvm`.
 //!
-//! They skip on a host without one, which every GitHub-hosted runner is, and
-//! `BOXLITE_TEST_REQUIRE_KVM=1` turns the skip into a failure so a runner that
-//! is supposed to have KVM cannot pass by skipping.
+//! They skip on a host without one, which every GitHub-hosted runner is.
+//! Setting `BOXLITE_TEST_REQUIRE_KVM` to any value turns the skip into a
+//! failure, so a runner that is supposed to have KVM cannot pass by skipping.
 //!
 //! x86_64 only: the instructions and the real-mode boot state are x86. The arm64
 //! equivalents arrive with `KVM_ARM_VCPU_INIT` and the register API.
