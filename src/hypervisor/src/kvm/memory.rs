@@ -4,7 +4,7 @@
 //! KVM memory-slot allocation, private to this backend.
 //!
 //! KVM identifies each guest memory mapping by a small integer slot, and the
-//! VMM's [`MemoryRegion`](crate::MemoryRegion) has no such field: the backend
+//! VMM's [`MemoryRegion`] has no such field: the backend
 //! picks the slot, because HVF has no equivalent concept.
 //!
 //! The ioctl itself is passed in as a closure, so every decision here, which

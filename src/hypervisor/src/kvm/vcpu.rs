@@ -17,9 +17,9 @@ type KvmOutcome<'a> = std::result::Result<KvmExit<'a>, kvm_ioctls::Error>;
 /// A KVM vCPU, bound to the thread that created it.
 ///
 /// `VcpuFd` is `Send`, but the trait requires backend vCPUs not to be: HVF
-/// accepts vCPU calls only from the creating thread, and this type carries the
-/// thread's identity in its [`KickState`]. `PhantomData<*const ()>` is what
-/// makes the compiler enforce that on Linux too.
+/// accepts vCPU calls only from the creating thread, and this type records that
+/// thread so another can kick it. `PhantomData<*const ()>` is what makes the
+/// compiler enforce the binding on Linux too.
 #[derive(Debug)]
 pub struct KvmVcpu {
     id: u32,
